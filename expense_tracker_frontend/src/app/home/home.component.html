@@ -1,0 +1,140 @@
+<!-- Header-->
+<div class="d-flex flex-column h-100">
+  <header class="bg-dark py-5">
+    <div class="container px-5">
+      <div class="row gx-5 align-items-center justify-content-center">
+        <div class="col-lg-8 col-xl-7 col-xxl-6">
+          <div class="my-5 text-center text-xl-start">
+            <h1 class="display-5 fw-bolder text-white mb-2">Expense Tracker</h1>
+            <p class="lead fw-normal text-white-50 mb-4">
+              Expense Tracker is a user-friendly web application that empowers
+              individuals to take control of their finances by monitoring their
+              expenses on a monthly or yearly basis. It provides a comprehensive
+              set of features to help users track, analyze, and visualize their
+              spending habits, enabling them to make informed financial
+              decisions.
+            </p>
+            <div
+              class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start"
+            >
+              <a class="btn btn-primary btn-lg px-4 me-sm-3">Get Started</a>
+              <a class="btn btn-outline-light btn-lg px-4">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+          <img
+            class="img-fluid rounded-3 my-5"
+            src="https://media.licdn.com/dms/image/D5612AQGplp7JKG6Iiw/article-cover_image-shrink_600_2000/0/1673950361361?e=1701907200&v=beta&t=JiNpb4_ucImprBXiNXVFjRF-NKg19_39ZZ66WF5egfU"
+            alt="..."
+          />
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Features section-->
+  <section class="py-5" id="features">
+    <div class="container px-5 my-5">
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <div class="text-center">
+            <h2 class="fw-bolder">Key Features</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row gx-5">
+        <div>
+          <div class="row gx-5 row-cols-1 row-cols-md-2">
+            <div class="col mb-5 h-100" *ngFor="let data of datas">
+              <div
+                class="feature bg-primary bg-gradient text-white rounded-3 mb-3"
+              >
+                <i class="bi bi-collection"></i>
+              </div>
+
+              <h2 class="h5">{{ data.title }}</h2>
+              <p class="mb-0">{{ data.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Testimonial section-->
+  <div class="py-5 bg-light">
+    <div class="container px-5 my-5">
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-10 col-xl-7">
+          <div class="text-center">
+            <div class="fs-4 mb-4 fst-italic">
+              Do not save what is left after spending, but spend what is left
+              after saving.
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+              <img
+                class="rounded-circle me-3"
+                src="https://dummyimage.com/40x40/ced4da/6c757d"
+                alt="..."
+              />
+              <div class="fw-bold">
+                Warren Buffett
+                <span class="fw-bold text-primary mx-1">/</span>
+                CEO, Berkshire Hathaway
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Blog preview section-->
+  <section class="py-5">
+    <div class="container px-5 my-5">
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <div class="text-center">
+            <h2 class="fw-bolder">Benefits of Expense Tracker</h2>
+            <p class="lead fw-normal text-muted mb-5">
+              Manage Your Finances with Ease without having the problem of spending
+              more than necessary.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row gx-5">
+        <div *ngFor="let benefit of benefits" class="col-lg-4 mb-5">
+          <div class="card h-100 shadow border-0">
+            <img class="card-img-top" src="{{ benefit.image }}" alt="..." />
+            <div class="card-body p-4">
+              <a class="text-decoration-none link-dark stretched-link"
+                ><h5 class="card-title mb-3">{{ benefit.title }}</h5></a
+              >
+              <p class="card-text mb-0">{{ benefit.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer-->
+  <footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+      <div
+        class="row align-items-center justify-content-between flex-column flex-sm-row"
+      >
+        <div class="col-auto">
+          <div class="small m-0 text-white">
+            Copyright &copy; Expense Tracker 2023
+          </div>
+        </div>
+        <div class="col-auto">
+          <a class="link-light small">Privacy</a>
+          <span class="text-white mx-1">&middot;</span>
+          <a class="link-light small">Terms</a>
+          <span class="text-white mx-1">&middot;</span>
+          <a class="link-light small">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
