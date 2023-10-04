@@ -8,37 +8,23 @@
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link text-white"
-            ><img src="dashboard.png" alt="" class="mr-2" />Dashboard</a
+            ><i class="fa fa-dashcube"></i> Dashboard</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white"
-            ><img src="projects.png" alt="" class="mr-2" />Projects</a
-          >
+          <a class="nav-link text-white"><i class="fa fa-money"></i>Budget</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white"
-            ><img src="chats.png" alt="" class="mr-2" />Chats</a
+            ><i class="fa fa-exchange"></i>Transaction</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white"
-            ><img src="availability.png" alt="" class="mr-2" />Availability</a
-          >
+          <a class="nav-link text-white"><i class="fa fa-file"></i>Report</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white"
-            ><img src="invoices.png" alt="" class="mr-2" />Invoices</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"
-            ><img src="integrations.png" alt="" class="mr-2" />Integrations</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"
-            ><img src="saved.png" alt="" class="mr-2" />Saved Items</a
+            ><i class="fa fa-file-pdf-o"></i>Export</a
           >
         </li>
       </ul>
@@ -69,7 +55,7 @@
               data-mdb-toggle="dropdown"
               aria-expanded="false"
             >
-              <i class="fas fa-bell"></i>
+              <i class="fa fa-bell"></i>
               <span class="badge rounded-pill badge-notification bg-danger"
                 >1</span
               >
@@ -128,22 +114,5 @@
 
   <!-- Contents -->
 
-  <div class="container">
-    <div class="row">
-      <!-- Top left chart -->
-      <div class="col-md-4">
-        <canvas id="earningsChart"></canvas>
-      </div>
-      <!-- Top middle chart -->
-      <div class="col-md-4">
-        <canvas id="salesChart"></canvas>
-      </div>
-      <!-- Top right chart -->
-      <div class="col-md-4">
-        <canvas id="revenueChart"></canvas>
-      </div>
-    </div>
-  </div>
-
-
+  <div id="chartdiv"></div>
 </div>
