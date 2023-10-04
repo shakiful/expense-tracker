@@ -1,34 +1,149 @@
-<p>dashboard works!</p>
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <a>Expense Tracker</a>
+    </header>
+    <div class="col-md-12 bg-dark">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="dashboard.png" alt="" class="mr-2" />Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="projects.png" alt="" class="mr-2" />Projects</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="chats.png" alt="" class="mr-2" />Chats</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="availability.png" alt="" class="mr-2" />Availability</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="invoices.png" alt="" class="mr-2" />Invoices</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="integrations.png" alt="" class="mr-2" />Integrations</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"
+            ><img src="saved.png" alt="" class="mr-2" />Saved Items</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
 
-<!-- Sidebar -->
+  <!-- header -->
+  <div id="content">
+    <div class="row">
+      <div class="w-100 bg-white">
+        <div
+          class="d-flex bg-body shadow-sm text-black p-3 pb-2 align-items-center"
+        >
+          <div class="flex-grow-1">
+            <h4>Good Morning Gail</h4>
+          </div>
+          <div class="me-2">
+            <button class="btn btn-primary">
+              Create New <span class="ms-1">+</span>
+            </button>
+          </div>
+          <!-- Notifications -->
+          <div class="dropdown">
+            <a
+              class="text-reset me-3 dropdown-toggle hidden-arrow"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-bell"></i>
+              <span class="badge rounded-pill badge-notification bg-danger"
+                >1</span
+              >
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <a class="dropdown-item">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item">Something else here</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="menu">
-  <div class="menu-item">
-    <i class="fas fa-tachometer-alt menu-icon"></i>
-    <span>Dashboard</span>
+  <!-- Contents -->
+
+  <div class="container">
+    <div class="row">
+      <!-- Top left chart -->
+      <div class="col-md-4">
+        <canvas id="earningsChart"></canvas>
+      </div>
+      <!-- Top middle chart -->
+      <div class="col-md-4">
+        <canvas id="salesChart"></canvas>
+      </div>
+      <!-- Top right chart -->
+      <div class="col-md-4">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
   </div>
-  <div class="menu-item">
-    <i class="fas fa-folder-open menu-icon"></i>
-    <span>Projects</span>
-  </div>
-  <div class="menu-item">
-    <i class="fas fa-comment-dots menu-icon"></i>
-    <span>Chats</span>
-  </div>
-  <div class="menu-item">
-    <i class="fas fa-calendar-check menu-icon"></i>
-    <span>Availability</span>
-  </div>
-  <div class="menu-item">
-    <i class="fas fa-file-invoice-dollar menu-icon"></i>
-    <span>Invoices</span>
-  </div>
-  <div class="menu-item">
-    <i class="fas fa-plug menu-icon"></i>
-    <span>Integrations</span>
-  </div>
-  <div class="menu-item">
-    <i class="fas fa-bookmark menu-icon"></i>
-    <span>Saved Items</span>
-  </div>
+
+
 </div>
