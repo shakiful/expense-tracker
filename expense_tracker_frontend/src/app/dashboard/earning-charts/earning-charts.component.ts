@@ -36,7 +36,6 @@ export class EarningChartsComponent implements OnInit {
   onSelected(value: string) {
     this.selectedOption = value;
     console.log(this.selectedOption);
-    
 
     this.cdr.detectChanges();
 
