@@ -1,9 +1,19 @@
-<div class="d-flex justify-content-end bg-body-secondary">
-  <select class="bg-body-secondary" [(ngModel)]="selectedOption" (ngModelChange)="onSelected($event)">
-    <option value="5">5</option>
-    <option value="15">15</option>
-    <option value="30">30</option>
-  </select>
+<div class="d-flex justify-content-between bg-body-secondary p-3">
+  <div class="fw-bold">Earning Chart
+    <br>
+    <p>$2400</p>
+  </div>
+  <div>
+    <select
+      class="bg-body-secondary"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onSelected($event)"
+    >
+      <option value="5">5 Days</option>
+      <option value="15">15 Days</option>
+      <option value="30">30 Days</option>
+    </select>
+  </div>
 </div>
 
 <div

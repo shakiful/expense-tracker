@@ -20,9 +20,14 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 })
 export class EarningChartsComponent implements OnInit {
   selectedOption: string = '5';
-  private root!: am5.Root;
+  private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
+  public chartData: any[] = []; // Store chart data
+
+  // Created the axes as class properties
+  private xAxis: am5xy.DateAxis<any> | undefined;
+  private yAxis: am5xy.ValueAxis<any> | undefined;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -35,114 +40,123 @@ export class EarningChartsComponent implements OnInit {
 
   onSelected(value: string) {
     this.selectedOption = value;
-    console.log(this.selectedOption);
 
-    this.cdr.detectChanges();
+    this.chartInit(this.selectedOption);
 
-    // Chart code goes in here
+    // console.log(this.cdr);
+  }
+
+  // Chart code goes in here
+  chartInit(selectedOption: any) {
     this.browserOnly(() => {
-      console.log(this.selectedOption);
-      let root = am5.Root.new('chartdiv');
+      // Initialize the root only if it's not already created
+      if (!this.root) {
+        this.root = am5.Root.new('chartdiv');
+        this.root._logo?.dispose();
+        this.root.setThemes([am5themes_Animated.new(this.root)]);
 
-      console.log(this.selectedOption);
+        // Create chart
+        this.chart = this.root.container.children.push(
+          am5xy.XYChart.new(this.root, {
+            panX: false,
+            panY: false,
+            wheelX: 'panX',
+            wheelY: 'zoomX',
+          })
+        );
 
-      root.setThemes([am5themes_Animated.new(root)]);
+        // Add cursor
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+        let cursor = this.chart.set(
+          'cursor',
+          am5xy.XYCursor.new(this.root, {
+            behavior: 'zoomX',
+          })
+        );
+        cursor.lineY.set('visible', false);
 
-      console.log(this.selectedOption);
+        let date = new Date();
+        date.setHours(0, 0, 0, 0);
+        let value = 100;
 
-      // Create chart
-      // https://www.amcharts.com/docs/v5/charts/xy-chart/
-      let chart = root.container.children.push(
-        am5xy.XYChart.new(root, {
-          panX: false,
-          panY: false,
-          wheelX: 'panX',
-          wheelY: 'zoomX',
-        })
-      );
-
-      // Add cursor
-      // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-      let cursor = chart.set(
-        'cursor',
-        am5xy.XYCursor.new(root, {
-          behavior: 'zoomX',
-        })
-      );
-      cursor.lineY.set('visible', false);
-
-      let date = new Date();
-      date.setHours(0, 0, 0, 0);
-      let value = 100;
-
-      function generateData() {
-        value = Math.round(Math.random() * 10 - 5 + value);
-        am5.time.add(date, 'day', 1);
-        return {
-          date: date.getTime(),
-          value: value,
-        };
-      }
-
-      function generateDatas(count: number) {
-        let data = [];
-        for (var i = 0; i < count; ++i) {
-          data.push(generateData());
+        function generateData() {
+          value = Math.round(Math.random() * 10 - 5 + value);
+          am5.time.add(date, 'day', 1);
+          return {
+            date: date.getTime(),
+            value: value,
+          };
         }
-        return data;
+
+        function generateDatas(count: number) {
+          let data = [];
+          for (var i = 0; i < count; ++i) {
+            data.push(generateData());
+          }
+
+          return data;
+        }
+
+        this.chartData = generateDatas(50);
       }
+
+      this.chart.xAxes.clear();
+      this.chart.yAxes.clear();
+      this.chart.series.clear();
 
       // Create axes
       // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-      let xAxis = chart.xAxes.push(
-        am5xy.DateAxis.new(root, {
+      this.xAxis = this.chart.xAxes.push(
+        am5xy.DateAxis.new(this.root, {
           maxDeviation: 0,
           baseInterval: {
             timeUnit: 'day',
             count: 1,
           },
-          renderer: am5xy.AxisRendererX.new(root, {
-            minGridDistance: 60,
+          renderer: am5xy.AxisRendererX.new(this.root, {
+            minGridDistance: 50,
           }),
-          tooltip: am5.Tooltip.new(root, {}),
+          tooltip: am5.Tooltip.new(this.root, {}),
         })
       );
 
-      let yAxis = chart.yAxes.push(
-        am5xy.ValueAxis.new(root, {
-          renderer: am5xy.AxisRendererY.new(root, {}),
+      this.yAxis = this.chart.yAxes.push(
+        am5xy.ValueAxis.new(this.root, {
+          renderer: am5xy.AxisRendererY.new(this.root, {}),
         })
       );
 
       // Add series
       // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-      let series = chart.series.push(
-        am5xy.ColumnSeries.new(root, {
+      this.series = this.chart.series.push(
+        am5xy.ColumnSeries.new(this.root, {
           name: 'Series',
-          xAxis: xAxis,
-          yAxis: yAxis,
+          xAxis: this.xAxis,
+          yAxis: this.yAxis,
           valueYField: 'value',
           valueXField: 'date',
+          tooltip: am5.Tooltip.new(this.root, {
+            labelText: '{valueY}',
+          }),
         })
       );
 
-      series.columns.template.setAll({
+      this.series.columns.template.setAll({
         strokeOpacity: 0,
         width: am5.percent(30),
       });
 
-      let data = generateDatas(50);
-      let maxDataPoints = Number(this.selectedOption); // Change this to your desired limit
-      console.log(this.selectedOption);
-      let limitedData = data.slice(0, maxDataPoints);
-      series.data.setAll(limitedData);
-
       // Make stuff animate on load
       // https://www.amcharts.com/docs/v5/concepts/animations/
-      series.appear(1000);
-      chart.appear(1000, 100);
+      this.series.appear(1000);
+      this.chart.appear(1000, 100);
+
+      let maxDataPoints = Number(this.selectedOption); // Change this to your desired limit
+      let limitedData = this.chartData.slice(0, maxDataPoints);
+      this.series.data.setAll(limitedData);
     });
   }
+
   // Run the function only in the browser
   browserOnly(f: () => void) {
     if (isPlatformBrowser(this.platformId)) {

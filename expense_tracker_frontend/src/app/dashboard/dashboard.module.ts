@@ -8,6 +8,7 @@ import { LoanChartsComponent } from './loan-charts/loan-charts.component';
 import { SavingChartsComponent } from './saving-charts/saving-charts.component';
 import { SpendingChartsComponent } from './spending-charts/spending-charts.component';
 import { FormsModule } from '@angular/forms';
+import { EarningByMonthChartsComponent } from './earning-by-month-charts/earning-by-month-charts.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     LoanChartsComponent,
     SavingChartsComponent,
     SpendingChartsComponent,
+    EarningByMonthChartsComponent,
   ],
   imports: [RouterModule, DashboardRoutingModule, MatIconModule, FormsModule],
 })

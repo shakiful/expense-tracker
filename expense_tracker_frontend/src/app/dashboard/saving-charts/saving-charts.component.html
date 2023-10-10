@@ -1,1 +1,23 @@
-<div class="bg-body-secondary h-100"> saving </div>
+<div class="d-flex justify-content-between bg-body-secondary p-3">
+  <div class="fw-bold">
+    Saving
+    <br />
+    <p>$2400</p>
+  </div>
+  <div>
+    <select
+      class="bg-body-secondary"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onSelected($event)"
+    >
+      <option value="5">5 Days</option>
+      <option value="15">15 Days</option>
+      <option value="30">30 Days</option>
+    </select>
+  </div>
+</div>
+<div
+  id="savingchartdiv"
+  style="width: 100%; height: 250px"
+  class="bg-body-secondary"
+></div>
