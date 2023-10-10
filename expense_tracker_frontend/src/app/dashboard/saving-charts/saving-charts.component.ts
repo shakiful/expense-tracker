@@ -136,6 +136,8 @@ export class SavingChartsComponent implements OnInit {
           yAxis: this.yAxis,
           valueYField: 'value',
           valueXField: 'date',
+          fill: am5.color('#ace5b5'),
+          stroke: am5.color('#55ca69'),
           curveFactory: d3.curveBasis,
           tooltip: am5.Tooltip.new(this.root, {
             labelText: '{valueY}',
@@ -145,7 +147,7 @@ export class SavingChartsComponent implements OnInit {
 
       this.series.fills.template.setAll({
         visible: true,
-        fillOpacity: 0.4,
+        fillOpacity: 0.9,
       });
 
       // Make stuff animate on load
