@@ -151,12 +151,13 @@ export class EarningByMonthChartsComponent implements OnInit {
       this.xAxis = this.chart.xAxes.push(
         am5xy.DateAxis.new(this.root, {
           maxDeviation: 0,
+          
           baseInterval: {
             timeUnit: 'month',
             count: 1,
           },
           renderer: am5xy.AxisRendererX.new(this.root, {
-            minGridDistance: 60,
+            minGridDistance: 30,
           }),
           tooltip: am5.Tooltip.new(this.root, {}),
         })
@@ -177,6 +178,8 @@ export class EarningByMonthChartsComponent implements OnInit {
           yAxis: this.yAxis,
           valueYField: 'total_value',
           valueXField: 'month',
+          fill: am5.color(0x095256),
+          stroke: am5.color(0x095256),
           tooltip: am5.Tooltip.new(this.root, {
             labelText: '{valueY}',
           }),
@@ -185,7 +188,7 @@ export class EarningByMonthChartsComponent implements OnInit {
 
       this.series.columns.template.setAll({
         strokeOpacity: 0,
-        width: am5.percent(30),
+        width: am5.percent(40),
       });
 
       // Make stuff animate on load
