@@ -77,13 +77,16 @@ export class LoanChartsComponent implements OnInit {
         cursor.lineY.set('visible', false);
 
         let date = new Date();
-        date.setHours(0, 0, 0, 0);
         let value = 100;
 
         function generateData() {
           value = Math.round(Math.random() * 10 - 5 + value);
           am5.time.add(date, 'day', 1);
+          console.log(date);
+          console.log(date.getTime());
+
           return {
+            month: date.getMonth(),
             date: date.getTime(),
             value: value,
           };
@@ -94,11 +97,13 @@ export class LoanChartsComponent implements OnInit {
           for (var i = 0; i < count; ++i) {
             data.push(generateData());
           }
+          console.log(data);
 
           return data;
         }
 
         this.chartData = generateDatas(50);
+        console.log(this.chartData);
       }
 
       this.chart.xAxes.clear();
