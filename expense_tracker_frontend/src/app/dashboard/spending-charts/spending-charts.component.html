@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between bg-body-secondary p-3">
   <div class="fw-bold">Spending By Month</div>
-  <div>
+  <div *ngIf="option">
     <select
       class="bg-body-secondary"
       [(ngModel)]="defaultDateRange"
