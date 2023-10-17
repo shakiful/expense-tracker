@@ -43,8 +43,6 @@ export class SavingChartsComponent implements OnInit {
     this.selectedOption = value;
 
     this.chartInit(this.selectedOption);
-
-    // console.log(this.cdr);
   }
 
   // Chart code goes in here
@@ -94,8 +92,6 @@ export class SavingChartsComponent implements OnInit {
           for (var i = 0; i < count; ++i) {
             data.push(generateData());
           }
-          console.log(data);
-
 
           return data;
         }

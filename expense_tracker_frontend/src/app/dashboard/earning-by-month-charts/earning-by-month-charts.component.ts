@@ -189,7 +189,7 @@ export class EarningByMonthChartsComponent implements OnInit {
 
       this.series.columns.template.setAll({
         strokeOpacity: 0,
-        width: am5.percent(40),
+        width: am5.percent(30),
       });
 
       // Make stuff animate on load

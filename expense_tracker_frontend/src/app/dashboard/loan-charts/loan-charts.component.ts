@@ -44,7 +44,6 @@ export class LoanChartsComponent implements OnInit {
 
     this.chartInit(this.selectedOption);
 
-    // console.log(this.cdr);
   }
 
   // Chart code goes in here
@@ -82,8 +81,6 @@ export class LoanChartsComponent implements OnInit {
         function generateData() {
           value = Math.round(Math.random() * 10 - 5 + value);
           am5.time.add(date, 'day', 1);
-          console.log(date);
-          console.log(date.getTime());
 
           return {
             month: date.getMonth(),
@@ -97,13 +94,13 @@ export class LoanChartsComponent implements OnInit {
           for (var i = 0; i < count; ++i) {
             data.push(generateData());
           }
-          console.log(data);
+
 
           return data;
         }
 
         this.chartData = generateDatas(50);
-        console.log(this.chartData);
+
       }
 
       this.chart.xAxes.clear();

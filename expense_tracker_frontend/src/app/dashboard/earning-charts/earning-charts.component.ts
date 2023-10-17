@@ -43,7 +43,6 @@ export class EarningChartsComponent implements OnInit {
     this.dashboardService.getMonthIndex().subscribe((data: any) => {
       this.monthIndex = data;
       this.chartInit();
-      console.log(this.monthIndex);
     });
 
     this.onSelected(this.selectedOption);
@@ -53,8 +52,6 @@ export class EarningChartsComponent implements OnInit {
     this.selectedOption = value;
 
     this.chartInit();
-
-    // console.log(this.cdr);
   }
 
   // Chart code goes in here
@@ -169,8 +166,6 @@ export class EarningChartsComponent implements OnInit {
       let limitedData;
 
       if (this.monthIndex !== undefined) {
-        console.log('im in');
-
         this.selectedData = this.chartData.filter(
           (filteringDataByMonth: { month: number }) => {
             return filteringDataByMonth.month == this.monthIndex;
@@ -178,13 +173,11 @@ export class EarningChartsComponent implements OnInit {
         );
 
         limitedData = this.selectedData.slice(0, maxDataPoints);
-        console.log(this.selectedData);
       } else {
         // Change this to your desired limit
         limitedData = this.chartData.slice(0, maxDataPoints);
       }
       this.series.data.setAll(limitedData);
-      console.log(limitedData);
     });
   }
 

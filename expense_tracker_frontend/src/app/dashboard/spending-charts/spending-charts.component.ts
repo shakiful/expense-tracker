@@ -20,7 +20,8 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
   styleUrls: ['./spending-charts.component.scss'],
 })
 export class SpendingChartsComponent implements OnInit {
-  public option = false;
+  public option: boolean = false;
+  isClicked: boolean = false;
   public defaultDateRange: string = '5';
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
@@ -40,15 +41,13 @@ export class SpendingChartsComponent implements OnInit {
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
   ngOnInit(): void {
-    this.onSelected(this.defaultDateRange);
+    this.chartInit(this.defaultDateRange);
   }
 
   onSelected(value: string) {
     this.defaultDateRange = value;
 
     this.chartInit(this.defaultDateRange);
-
-    // console.log(this.cdr);
   }
 
   // Chart code goes in here
@@ -160,7 +159,7 @@ export class SpendingChartsComponent implements OnInit {
             count: 1,
           },
           renderer: am5xy.AxisRendererX.new(this.root, {
-            minGridDistance: 30,
+            minGridDistance: 50,
           }),
           tooltip: am5.Tooltip.new(this.root, {}),
         })
@@ -191,7 +190,7 @@ export class SpendingChartsComponent implements OnInit {
 
       this.series.columns.template.setAll({
         strokeOpacity: 0,
-        width: am5.percent(40),
+        width: am5.percent(30),
       });
 
       // Make stuff animate on load
@@ -204,29 +203,39 @@ export class SpendingChartsComponent implements OnInit {
       console.log(this.monthlyValue);
 
       this.series.data.setAll(this.monthlyValue);
+      console.log(this.option);
 
       this.series.columns.template.events.once('click', (ev) => {
-        this.option = true;
-        this.filterData = this.dashboardService.filterDataByMonth(
-          this.chartData,
-          ev
-        );
+        if (!this.isClicked) {
+          this.isClicked = true;
+          this.option = true;
 
-        let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
+          this.filterData = this.dashboardService.filterDataByMonth(
+            this.chartData,
+            ev
+          );
 
-        let limitedData = this.filterData.slice(0, maxDataPoints);
+          let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
 
-        // Update baseInterval in the xAxis
-        if (this.xAxis) {
-          this.xAxis.set('baseInterval', {
-            timeUnit: 'day',
-            count: 1,
-          });
+          let limitedData = this.filterData.slice(0, maxDataPoints);
+
+          // Update baseInterval in the xAxis
+          if (this.xAxis) {
+            this.xAxis.set('baseInterval', {
+              timeUnit: 'day',
+              count: 1,
+            });
+          }
+
+          this.series.setAll({ valueXField: 'date', valueYField: 'value' });
+          this.series.data.setAll(limitedData);
+
+          // Trigger change detection to update the HTML
+          this.cdr.detectChanges();
         }
-
-        this.series.setAll({ valueXField: 'date', valueYField: 'value' });
-        this.series.data.setAll(limitedData);
       });
+      this.isClicked = false;
+      this.option = false;
     });
   }
 
