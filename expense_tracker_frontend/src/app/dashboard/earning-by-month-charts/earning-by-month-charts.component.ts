@@ -12,6 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { DashboardService } from 'src/app/services/dashboard-service/dashboard.service';
 
 @Component({
   selector: 'app-earning-by-month-charts',
@@ -32,6 +33,7 @@ export class EarningByMonthChartsComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private dashboardService: DashboardService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
@@ -139,7 +141,6 @@ export class EarningByMonthChartsComponent implements OnInit {
         this.chartData = __generateData(90);
 
         this.monthlyValue = filterMonthValue(this.chartData);
-        console.log(this.monthlyValue);
       }
 
       this.chart.xAxes.clear();
@@ -151,7 +152,7 @@ export class EarningByMonthChartsComponent implements OnInit {
       this.xAxis = this.chart.xAxes.push(
         am5xy.DateAxis.new(this.root, {
           maxDeviation: 0,
-          
+
           baseInterval: {
             timeUnit: 'month',
             count: 1,
@@ -198,9 +199,31 @@ export class EarningByMonthChartsComponent implements OnInit {
 
       // let maxDataPoints = Number(this.defaultDateRange); // Change this to your desired limit
       // let limitedData = this.chartData.slice(0, maxDataPoints);
-      console.log(this.monthlyValue);
-
       this.series.data.setAll(this.monthlyValue);
+
+      this.series.columns.template.events.on('click', (ev) => {
+        const clickedMonth: any = ev.target.dataItem?.dataContext;
+
+        const timestamp = clickedMonth.month; // Replace this with your timestamp
+
+        // Convert the timestamp back to a JavaScript Date object
+        const date = new Date(timestamp);
+
+        // Get the month index (0-based)
+        const monthIndex = date.getMonth();
+
+        this.dashboardService.setMonthIndex(monthIndex);
+
+        let selectedMonth = this.dashboardService.filterDataByMonth(
+          this.chartData,
+          ev
+        );
+        // let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
+        // let limitedData = this.filterData.slice(0, maxDataPoints);
+        // // this.chart.xAxes.getIndex(0)?.
+        // this.series.setAll({ valueXField: 'date', valueYField: 'value' });
+        // this.series.data.setAll(limitedData);
+      });
     });
   }
 

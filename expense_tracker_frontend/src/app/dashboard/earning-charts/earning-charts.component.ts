@@ -12,6 +12,8 @@ import { isPlatformBrowser } from '@angular/common';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { DashboardService } from 'src/app/services/dashboard-service/dashboard.service';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-earning-charts',
@@ -24,6 +26,8 @@ export class EarningChartsComponent implements OnInit {
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
   public chartData: any[] = []; // Store chart data
+  public selectedData: any[] = []; // Store selected chart data
+  private monthIndex: any;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -31,23 +35,30 @@ export class EarningChartsComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private dashboardService: DashboardService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
   ngOnInit(): void {
+    this.dashboardService.getMonthIndex().subscribe((data: any) => {
+      this.monthIndex = data;
+      this.chartInit();
+      console.log(this.monthIndex);
+    });
+
     this.onSelected(this.selectedOption);
   }
 
   onSelected(value: string) {
     this.selectedOption = value;
 
-    this.chartInit(this.selectedOption);
+    this.chartInit();
 
     // console.log(this.cdr);
   }
 
   // Chart code goes in here
-  chartInit(selectedOption: any) {
+  chartInit() {
     this.browserOnly(() => {
       // Initialize the root only if it's not already created
       if (!this.root) {
@@ -83,6 +94,7 @@ export class EarningChartsComponent implements OnInit {
           value = Math.round(Math.random() * 10 - 5 + value);
           am5.time.add(date, 'day', 1);
           return {
+            month: date.getMonth(),
             date: date.getTime(),
             value: value,
           };
@@ -97,7 +109,7 @@ export class EarningChartsComponent implements OnInit {
           return data;
         }
 
-        this.chartData = generateDatas(50);
+        this.chartData = generateDatas(90);
       }
 
       this.chart.xAxes.clear();
@@ -146,14 +158,33 @@ export class EarningChartsComponent implements OnInit {
         width: am5.percent(30),
       });
 
+      // this.series.columns.template.events.once('click', (ev) => {
+
       // Make stuff animate on load
       // https://www.amcharts.com/docs/v5/concepts/animations/
       this.series.appear(1000);
       this.chart.appear(1000, 100);
 
-      let maxDataPoints = Number(this.selectedOption); // Change this to your desired limit
-      let limitedData = this.chartData.slice(0, maxDataPoints);
+      let maxDataPoints = Number(this.selectedOption);
+      let limitedData;
+
+      if (this.monthIndex !== undefined) {
+        console.log('im in');
+
+        this.selectedData = this.chartData.filter(
+          (filteringDataByMonth: { month: number }) => {
+            return filteringDataByMonth.month == this.monthIndex;
+          }
+        );
+
+        limitedData = this.selectedData.slice(0, maxDataPoints);
+        console.log(this.selectedData);
+      } else {
+        // Change this to your desired limit
+        limitedData = this.chartData.slice(0, maxDataPoints);
+      }
       this.series.data.setAll(limitedData);
+      console.log(limitedData);
     });
   }
 

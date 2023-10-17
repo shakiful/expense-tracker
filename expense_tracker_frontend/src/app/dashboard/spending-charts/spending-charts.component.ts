@@ -1,3 +1,4 @@
+import { DashboardService } from '../../services/dashboard-service/dashboard.service';
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectorRef,
@@ -20,13 +21,13 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 })
 export class SpendingChartsComponent implements OnInit {
   public option = false;
-  public isMonth = true;
   public defaultDateRange: string = '5';
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
   public chartData: any[] = []; // Store chart data
   public monthlyValue: any[] = []; // Store chart data by month
+  public filterData: any; //filtered Chart Data by month
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -34,6 +35,7 @@ export class SpendingChartsComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private dashboardService: DashboardService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
@@ -154,7 +156,7 @@ export class SpendingChartsComponent implements OnInit {
           maxDeviation: 0,
 
           baseInterval: {
-            timeUnit: this.isMonth? 'month':'day',
+            timeUnit: 'month',
             count: 1,
           },
           renderer: am5xy.AxisRendererX.new(this.root, {
@@ -204,44 +206,26 @@ export class SpendingChartsComponent implements OnInit {
       this.series.data.setAll(this.monthlyValue);
 
       this.series.columns.template.events.once('click', (ev) => {
-        this.isMonth = false
-        console.log(this.isMonth)
         this.option = true;
-        console.log('Clicked on a column', ev.target);
-        if (ev.target.dataItem) {
-          const clickedData = ev.target.dataItem.dataContext as {
-            month: number;
-            total_value: number;
-          };
-          console.log('Clicked on a column', clickedData);
-          // Display the data or perform other actions based on the clicked data
-          const timestamp = clickedData.month; // Replace this with your timestamp
+        this.filterData = this.dashboardService.filterDataByMonth(
+          this.chartData,
+          ev
+        );
 
-          // Convert the timestamp back to a JavaScript Date object
-          const date = new Date(timestamp);
+        let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
 
-          // Get the month index (0-based)
-          const monthIndex = date.getMonth();
+        let limitedData = this.filterData.slice(0, maxDataPoints);
 
-          let filterData = this.chartData.filter((filteringDataByMonth) => {
-            return filteringDataByMonth.month == monthIndex;
+        // Update baseInterval in the xAxis
+        if (this.xAxis) {
+          this.xAxis.set('baseInterval', {
+            timeUnit: 'day',
+            count: 1,
           });
-
-          let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
-          console.log(maxDataPoints);
-          console.log(filterData);
-
-          let limitedData = filterData.slice(0, maxDataPoints);
-          console.log(limitedData);
-          console.log(this.option);
-
-          // this.chart.xAxes.getIndex(0)?.
-
-          this.series.set('valueXField', 'date');
-          this.series.set('valueYField', 'value');
-          this.series.data.setAll(limitedData);
-
         }
+
+        this.series.setAll({ valueXField: 'date', valueYField: 'value' });
+        this.series.data.setAll(limitedData);
       });
     });
   }

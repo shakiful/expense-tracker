@@ -8,14 +8,10 @@ import { HeaderComponent } from './header/header.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedComponent } from './shared/shared.component';
-import { ServicesComponent } from './services/services.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ConfirmationModalComponent } from './shared/confirmation-modal/confirmation-modal.component';
 import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { TransactionServiceComponent } from './services/transaction-service/transaction-service.component';
-import { BudgetServiceComponent } from './services/budget-service/budget-service.component';
-import { AuthServiceComponent } from './services/auth-service/auth-service.component';
 import { HomeModule } from './home/home.module';
 import { RouterModule } from '@angular/router';
 import { BudgetModule } from './budget/budget.module';
@@ -32,14 +28,10 @@ import { FormsModule } from '@angular/forms';
     SearchFilterComponent,
     ProfileComponent,
     SharedComponent,
-    ServicesComponent,
     NotificationComponent,
     ConfirmationModalComponent,
     ErrorHandlingComponent,
     SpinnerComponent,
-    TransactionServiceComponent,
-    BudgetServiceComponent,
-    AuthServiceComponent,
     DropdowndirectivePipe,
   ],
   imports: [

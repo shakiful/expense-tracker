@@ -9,6 +9,7 @@ import { SavingChartsComponent } from './saving-charts/saving-charts.component';
 import { SpendingChartsComponent } from './spending-charts/spending-charts.component';
 import { FormsModule } from '@angular/forms';
 import { EarningByMonthChartsComponent } from './earning-by-month-charts/earning-by-month-charts.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,12 @@ import { EarningByMonthChartsComponent } from './earning-by-month-charts/earning
     SpendingChartsComponent,
     EarningByMonthChartsComponent,
   ],
-  imports: [RouterModule, DashboardRoutingModule, MatIconModule, FormsModule],
+  imports: [
+    RouterModule,
+    DashboardRoutingModule,
+    MatIconModule,
+    FormsModule,
+    CommonModule,
+  ],
 })
 export class DashboardModule {}
