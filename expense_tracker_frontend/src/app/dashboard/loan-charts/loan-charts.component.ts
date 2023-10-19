@@ -117,7 +117,7 @@ export class LoanChartsComponent implements OnInit {
             count: 0,
           },
           renderer: am5xy.AxisRendererX.new(this.root, {
-            minGridDistance: 40,
+            minGridDistance: 50,
           }),
           tooltip: am5.Tooltip.new(this.root, {}),
         })

@@ -29,6 +29,7 @@ export class SpendingChartsComponent implements OnInit {
   public chartData: any[] = []; // Store chart data
   public monthlyValue: any[] = []; // Store chart data by month
   public filterData: any; //filtered Chart Data by month
+  limitedData: any;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -46,6 +47,8 @@ export class SpendingChartsComponent implements OnInit {
 
   onSelected(value: string) {
     this.defaultDateRange = value;
+
+    console.log(this.limitedData);
 
     this.chartInit(this.defaultDateRange);
   }
@@ -195,17 +198,59 @@ export class SpendingChartsComponent implements OnInit {
 
       // Make stuff animate on load
       // https://www.amcharts.com/docs/v5/concepts/animations/
-      this.series.appear(3000);
-      this.chart.appear(1000, 100);
 
       // let maxDataPoints = Number(this.defaultDateRange); // Change this to your desired limit
       // let limitedData = this.chartData.slice(0, maxDataPoints);
-      console.log(this.monthlyValue);
 
-      this.series.data.setAll(this.monthlyValue);
+      function dataRange(
+        filterData: any,
+        limitedData: any,
+        xAxis: any,
+        series: any,
+        cdr: any
+      ) {
+        console.log('im in');
+        console.log(filterData);
+
+        let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
+
+        limitedData = filterData.slice(0, maxDataPoints);
+
+        xAxis.set('baseInterval', {
+          timeUnit: 'day',
+          count: 1,
+        });
+
+        series.setAll({ valueXField: 'date', valueYField: 'value' });
+
+        series.data.setAll(limitedData);
+
+        console.log(limitedData);
+
+        cdr.detectChanges();
+      }
+
+      if (this.isClicked) {
+        console.log('im in');
+        dataRange(
+          this.filterData,
+          this.limitedData,
+          this.xAxis,
+          this.series,
+          this.cdr
+        );
+      } else {
+        this.series.data.setAll(this.monthlyValue);
+      }
+
       console.log(this.option);
 
+      this.series.appear(3000);
+      this.chart.appear(1000, 100);
+
       this.series.columns.template.events.once('click', (ev) => {
+        console.log('im in');
+
         if (!this.isClicked) {
           this.isClicked = true;
           this.option = true;
@@ -215,27 +260,15 @@ export class SpendingChartsComponent implements OnInit {
             ev
           );
 
-          let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
-
-          let limitedData = this.filterData.slice(0, maxDataPoints);
-
-          // Update baseInterval in the xAxis
-          if (this.xAxis) {
-            this.xAxis.set('baseInterval', {
-              timeUnit: 'day',
-              count: 1,
-            });
-          }
-
-          this.series.setAll({ valueXField: 'date', valueYField: 'value' });
-          this.series.data.setAll(limitedData);
-
-          // Trigger change detection to update the HTML
-          this.cdr.detectChanges();
+          dataRange(
+            this.filterData,
+            this.limitedData,
+            this.xAxis,
+            this.series,
+            this.cdr
+          );
         }
       });
-      this.isClicked = false;
-      this.option = false;
     });
   }
 
