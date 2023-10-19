@@ -48,8 +48,6 @@ export class SpendingChartsComponent implements OnInit {
   onSelected(value: string) {
     this.defaultDateRange = value;
 
-    console.log(this.limitedData);
-
     this.chartInit(this.defaultDateRange);
   }
 
@@ -183,8 +181,8 @@ export class SpendingChartsComponent implements OnInit {
           yAxis: this.yAxis,
           valueYField: 'total_value',
           valueXField: 'month',
-          fill: am5.color(0x095256),
-          stroke: am5.color(0x095256),
+          fill: am5.color('#F6BE9A'),
+          stroke: am5.color('#F6BE9A'),
           tooltip: am5.Tooltip.new(this.root, {
             labelText: '{valueY}',
           }),
@@ -209,10 +207,9 @@ export class SpendingChartsComponent implements OnInit {
         series: any,
         cdr: any
       ) {
-        console.log('im in');
         console.log(filterData);
 
-        let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
+        let maxDataPoints = Number(defaultDateRange);
 
         limitedData = filterData.slice(0, maxDataPoints);
 
@@ -290,4 +287,6 @@ export class SpendingChartsComponent implements OnInit {
       }
     });
   }
+
+  goBack() {}
 }

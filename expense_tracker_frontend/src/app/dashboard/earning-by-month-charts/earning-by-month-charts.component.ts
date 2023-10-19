@@ -179,8 +179,8 @@ export class EarningByMonthChartsComponent implements OnInit {
           yAxis: this.yAxis,
           valueYField: 'total_value',
           valueXField: 'month',
-          fill: am5.color(0x095256),
-          stroke: am5.color(0x095256),
+          fill: am5.color('#F6BE9A'),
+          stroke: am5.color('#F6BE9A'),
           tooltip: am5.Tooltip.new(this.root, {
             labelText: '{valueY}',
           }),
