@@ -1,5 +1,10 @@
 <div class="d-flex justify-content-between bg-white p-3">
-  <div class="fw-bold">Spending By Month</div>
+  <div class="fw-bold">
+    Spending By Month
+    <br />
+    <br />
+    <p *ngIf="option">Total Cost: ${{ total_cost }}</p>
+  </div>
   <div class="d-flex flex-column" *ngIf="option">
     <select
       class="bg-white"

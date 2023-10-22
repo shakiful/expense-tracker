@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-between bg-white p-3">
-  <div class="fw-bold">Earning Chart
-    <br>
-    <p>$2400</p>
+  <div class="fw-bold">
+    Earning Chart
+    <br />
+    <p *ngIf="clicked" class="mt-2">Total Earning: ${{ total_cost }}</p>
   </div>
   <div>
     <select
@@ -16,8 +17,4 @@
   </div>
 </div>
 
-<div
-  id="chartdiv"
-  style="width: 100%; height: 250px"
-  class="bg-white"
-></div>
+<div id="chartdiv" style="width: 100%; height: 250px" class="bg-white"></div>

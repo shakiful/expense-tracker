@@ -30,6 +30,7 @@ export class SpendingChartsComponent implements OnInit {
   public monthlyValue: any[] = []; // Store chart data by month
   public filterData: any; //filtered Chart Data by month
   limitedData: any;
+  total_cost: number | undefined;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -239,12 +240,17 @@ export class SpendingChartsComponent implements OnInit {
         this.series.data.setAll(this.monthlyValue);
       }
 
-      console.log(this.option);
-
       this.series.appear(3000);
       this.chart.appear(1000, 100);
 
       this.series.columns.template.events.once('click', (ev) => {
+        const month = ev.target.dataItem?.dataContext as {
+          month: number;
+          total_value: number;
+        };
+
+        this.total_cost = month.total_value;
+
         console.log('im in');
 
         if (!this.isClicked) {

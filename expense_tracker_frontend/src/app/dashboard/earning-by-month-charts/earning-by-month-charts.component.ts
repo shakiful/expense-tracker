@@ -204,6 +204,8 @@ export class EarningByMonthChartsComponent implements OnInit {
       this.series.columns.template.events.on('click', (ev) => {
         const clickedMonth: any = ev.target.dataItem?.dataContext;
 
+        let total_cost = clickedMonth.total_value;
+
         const timestamp = clickedMonth.month; // Replace this with your timestamp
 
         // Convert the timestamp back to a JavaScript Date object
@@ -212,12 +214,11 @@ export class EarningByMonthChartsComponent implements OnInit {
         // Get the month index (0-based)
         const monthIndex = date.getMonth();
 
+        this.dashboardService.setTotalCost(total_cost);
+
         this.dashboardService.setMonthIndex(monthIndex);
 
-        let selectedMonth = this.dashboardService.filterDataByMonth(
-          this.chartData,
-          ev
-        );
+        this.dashboardService.filterDataByMonth(this.chartData, ev);
         // let maxDataPoints = Number(defaultDateRange); // Change this to your desired limit
         // let limitedData = this.filterData.slice(0, maxDataPoints);
         // // this.chart.xAxes.getIndex(0)?.

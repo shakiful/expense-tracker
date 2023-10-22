@@ -1,4 +1,3 @@
-import { ISpritePointerEvent, RoundedRectangle } from '@amcharts/amcharts5';
 import { Injectable } from '@angular/core';
 import { Subject, filter } from 'rxjs';
 
@@ -8,19 +7,28 @@ import { Subject, filter } from 'rxjs';
 export class DashboardService {
   constructor() {}
 
-  private dataSubject = new Subject<any>();
+  private monthIndex = new Subject<any>();
+  private totalCost = new Subject<any>();
 
   setMonthIndex(data: any) {
     // Process the data here
     console.log(data);
 
-    this.dataSubject.next(data); // Emit the processed data
+    this.monthIndex.next(data); // Emit the processed data
+  }
+
+  setTotalCost(data: number) {
+    this.totalCost.next(data);
+  }
+
+  getTotalCost() {
+    return this.totalCost.asObservable();
   }
 
   getMonthIndex() {
-    console.log(this.dataSubject.asObservable());
+    console.log(this.monthIndex.asObservable());
 
-    return this.dataSubject.asObservable();
+    return this.monthIndex.asObservable();
   }
 
   filterDataByMonth(chartData: any[], ev: any) {

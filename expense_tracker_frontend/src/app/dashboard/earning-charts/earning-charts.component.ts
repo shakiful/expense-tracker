@@ -13,7 +13,6 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { DashboardService } from 'src/app/services/dashboard-service/dashboard.service';
-import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-earning-charts',
@@ -28,6 +27,8 @@ export class EarningChartsComponent implements OnInit {
   public chartData: any[] = []; // Store chart data
   public selectedData: any[] = []; // Store selected chart data
   private monthIndex: any;
+  total_cost: number | undefined;
+  clicked: any | false;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -40,6 +41,11 @@ export class EarningChartsComponent implements OnInit {
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
   ngOnInit(): void {
+    this.dashboardService.getTotalCost().subscribe((data: number) => {
+      this.total_cost = data;
+      this.clicked = true;
+    });
+
     this.dashboardService.getMonthIndex().subscribe((data: any) => {
       this.monthIndex = data;
       this.chartInit();
@@ -181,7 +187,6 @@ export class EarningChartsComponent implements OnInit {
         // Change this to your desired limit
         this.selectedData = this.chartData.filter(
           (filteringDataByMonth: { month: number }) => {
-
             return filteringDataByMonth.month == firstIndex;
           }
         );
