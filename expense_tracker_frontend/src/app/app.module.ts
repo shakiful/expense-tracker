@@ -9,7 +9,6 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedComponent } from './shared/shared.component';
 import { NotificationComponent } from './notification/notification.component';
-import { ConfirmationModalComponent } from './shared/confirmation-modal/confirmation-modal.component';
 import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeModule } from './home/home.module';
@@ -29,7 +28,6 @@ import { FormsModule } from '@angular/forms';
     ProfileComponent,
     SharedComponent,
     NotificationComponent,
-    ConfirmationModalComponent,
     ErrorHandlingComponent,
     SpinnerComponent,
     DropdowndirectivePipe,

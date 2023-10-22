@@ -42,7 +42,11 @@
             <h4>Good Morning Gail</h4>
           </div>
           <div class="me-2">
-            <button class="btn btn-primary">
+            <button
+              class="btn btn-primary"
+              (click)="openPopup()"
+              mdbWavesEffect
+            >
               Create New <span class="ms-1">+</span>
             </button>
           </div>
@@ -128,6 +132,63 @@
     </div>
     <div class="p-3 col-6">
       <app-earning-by-month-charts></app-earning-by-month-charts>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Container -->
+
+<div
+  *ngIf="showPopup"
+  class="modal"
+  [class.show]="showPopup"
+  tabindex="-1"
+  role="dialog"
+  style="display: block"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Spending Input</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closePopup()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              formControlName="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Example textarea</label
+            >
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              formControlName="textarea"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>

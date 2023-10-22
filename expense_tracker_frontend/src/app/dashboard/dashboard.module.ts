@@ -7,9 +7,10 @@ import { EarningChartsComponent } from './earning-charts/earning-charts.componen
 import { LoanChartsComponent } from './loan-charts/loan-charts.component';
 import { SavingChartsComponent } from './saving-charts/saving-charts.component';
 import { SpendingChartsComponent } from './spending-charts/spending-charts.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EarningByMonthChartsComponent } from './earning-by-month-charts/earning-by-month-charts.component';
 import { CommonModule } from '@angular/common';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
     SavingChartsComponent,
     SpendingChartsComponent,
     EarningByMonthChartsComponent,
+    ModalComponent,
   ],
   imports: [
     RouterModule,
@@ -26,6 +28,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     FormsModule,
     CommonModule,
+    ReactiveFormsModule,
   ],
 })
 export class DashboardModule {}
