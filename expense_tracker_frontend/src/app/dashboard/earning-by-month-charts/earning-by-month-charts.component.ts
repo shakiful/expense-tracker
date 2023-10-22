@@ -26,6 +26,7 @@ export class EarningByMonthChartsComponent implements OnInit {
   private series!: am5xy.ColumnSeries; // Type annotation for series
   public chartData: any[] = []; // Store chart data
   public monthlyValue: any[] = []; // Store chart data
+  total_cost: any;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -201,10 +202,13 @@ export class EarningByMonthChartsComponent implements OnInit {
       // let limitedData = this.chartData.slice(0, maxDataPoints);
       this.series.data.setAll(this.monthlyValue);
 
+      this.total_cost = this.monthlyValue[0].total_value;
+      this.dashboardService.setTotalCost(this.total_cost);
+
       this.series.columns.template.events.on('click', (ev) => {
         const clickedMonth: any = ev.target.dataItem?.dataContext;
 
-        let total_cost = clickedMonth.total_value;
+        this.total_cost = clickedMonth.total_value;
 
         const timestamp = clickedMonth.month; // Replace this with your timestamp
 
@@ -214,7 +218,7 @@ export class EarningByMonthChartsComponent implements OnInit {
         // Get the month index (0-based)
         const monthIndex = date.getMonth();
 
-        this.dashboardService.setTotalCost(total_cost);
+        this.dashboardService.setTotalCost(this.total_cost);
 
         this.dashboardService.setMonthIndex(monthIndex);
 

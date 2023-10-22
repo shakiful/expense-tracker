@@ -28,7 +28,6 @@ export class EarningChartsComponent implements OnInit {
   public selectedData: any[] = []; // Store selected chart data
   private monthIndex: any;
   total_cost: number | undefined;
-  clicked: any | false;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -43,7 +42,6 @@ export class EarningChartsComponent implements OnInit {
   ngOnInit(): void {
     this.dashboardService.getTotalCost().subscribe((data: number) => {
       this.total_cost = data;
-      this.clicked = true;
     });
 
     this.dashboardService.getMonthIndex().subscribe((data: any) => {
