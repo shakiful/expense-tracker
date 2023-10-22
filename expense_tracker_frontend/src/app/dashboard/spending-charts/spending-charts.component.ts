@@ -228,7 +228,6 @@ export class SpendingChartsComponent implements OnInit {
       }
 
       if (this.isClicked) {
-        console.log('im in');
         dataRange(
           this.filterData,
           this.limitedData,
@@ -288,5 +287,11 @@ export class SpendingChartsComponent implements OnInit {
     });
   }
 
-  goBack() {}
+  goBack() {
+    console.log('clicked');
+
+    this.isClicked = false;
+    this.option = false;
+    this.chartInit(this.defaultDateRange);
+  }
 }

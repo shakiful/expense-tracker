@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between bg-white p-3">
   <div class="fw-bold">Spending By Month</div>
-  <div *ngIf="option">
+  <div class="d-flex flex-column" *ngIf="option">
     <select
       class="bg-white"
       [(ngModel)]="defaultDateRange"
@@ -11,8 +11,8 @@
       <option value="30">30 Days</option>
     </select>
     <br />
-    <button class="btn btn-light mt-2 rounded-circle" onclick="goBack">
-      <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+    <button class="btn btn-light rounded" (click)="goBack()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
     </button>
   </div>
 </div>

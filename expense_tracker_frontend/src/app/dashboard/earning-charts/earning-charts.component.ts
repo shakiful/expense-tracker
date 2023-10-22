@@ -174,15 +174,18 @@ export class EarningChartsComponent implements OnInit {
 
         limitedData = this.selectedData.slice(0, maxDataPoints);
       } else {
+        let firstIndex: any;
+        if (this.chartData.length > 0) {
+          firstIndex = this.chartData[0].month;
+        }
         // Change this to your desired limit
         this.selectedData = this.chartData.filter(
           (filteringDataByMonth: { month: number }) => {
-            console.log(filteringDataByMonth.month);
 
-            return filteringDataByMonth.month == filteringDataByMonth.month;
+            return filteringDataByMonth.month == firstIndex;
           }
         );
-        limitedData = this.chartData.slice(0, maxDataPoints);
+        limitedData = this.selectedData.slice(0, maxDataPoints);
       }
       this.series.data.setAll(limitedData);
     });
