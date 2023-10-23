@@ -21,53 +21,7 @@ body {
 
 /* Sidebar Styles */
 
-#sidebar {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 15%;
-  height: 100%;
-  margin-left: -250px;
-  background-color: rgb(33, 37, 41);
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
 
-#sidebar header {
-  background-color: #263238;
-  font-size: 20px;
-  line-height: 63px;
-  text-align: center;
-}
-
-#sidebar header a {
-  color: #fff;
-  display: block;
-  text-decoration: none;
-}
-
-#sidebar header a:hover {
-  color: #fff;
-}
-
-#sidebar .nav a {
-  background: none;
-  border-bottom: 1px solid #455a64;
-  color: #cfd8dc;
-  font-size: 16px;
-  padding: 16px 24px;
-}
-
-#sidebar .nav a:hover {
-  background: none;
-  color: #eceff1;
-}
-
-#sidebar .nav a i {
-  margin-right: 16px;
-}
 
 .rounded-circle {
   border-radius: 50%;
@@ -77,17 +31,4 @@ body {
   background-color: #f7f7ff;
 }
 
-.modal.show {
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.5); /* Set the background to transparent */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  backdrop-filter: blur(1px);
-  display: none;
-}
 
-.modal.show .modal-content {
-  width: 600px; /* Adjust the width as needed */
-}

@@ -1,0 +1,13 @@
+.modal.show {
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5); /* Set the background to transparent */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.modal.show .modal-content {
+  width: 600px; /* Adjust the width as needed */
+}
