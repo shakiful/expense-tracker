@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
@@ -35,6 +36,7 @@ import { DashboardModalComponent } from './dashboard-modal/dashboard-popup/dashb
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
 })
 export class DashboardModule {}

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PopupServiceService } from 'src/app/services/dashboard-service/popup-service.service';
+import {
+  NgbAlertModule,
+  NgbDatepickerModule,
+  NgbDate,
+  NgbModule,
+  NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard-modal',
@@ -9,8 +16,14 @@ import { PopupServiceService } from 'src/app/services/dashboard-service/popup-se
 })
 export class DashboardModalComponent implements OnInit {
   form: FormGroup;
-  showPopup = false;
+  showPopup = true;
   isSubmitted = false;
+  model!: NgbDateStruct;
+
+  displayMonths = 1;
+  navigation = 'select box';
+  showWeekNumbers = false;
+  outsideDays = 'hidden';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,6 +31,7 @@ export class DashboardModalComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       amount: [null, [Validators.required, Validators.min(0)]],
+      datePicker: [null, Validators.required],
     });
   }
 
@@ -32,9 +46,11 @@ export class DashboardModalComponent implements OnInit {
     this.isSubmitted = true;
     console.log(this.form.value);
     this.closePopup();
+    this.form.reset();
   }
 
   closePopup(): void {
     this.showPopup = false;
+    this.form.reset();
   }
 }

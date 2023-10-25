@@ -19,6 +19,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { ReportModule } from './report/report.module';
 import { DropdowndirectivePipe } from './shared/dropdowndirective.pipe';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FormsModule } from '@angular/forms';
     ReportModule,
     RouterModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
