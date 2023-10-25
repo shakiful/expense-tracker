@@ -23,11 +23,12 @@
         <form [formGroup]="form">
           <!-- entry -->
           <div class="mb-3">
-            <div class="input-group">
+            <div class="input-group mb-3">
               <input
                 class="form-control"
                 placeholder="yyyy-mm-dd"
                 name="dp"
+                [(ngModel)]="model"
                 [displayMonths]="displayMonths"
                 [navigation]="navigation"
                 [outsideDays]="outsideDays"
@@ -42,9 +43,6 @@
                 type="button"
               ></button>
             </div>
-
-            <hr />
-            <pre>Date: {{ this.form.value.datePicker | json}}</pre>
             <div class="input-container">
               <label class="custom-control-label ms-1 me-2" for="amount"
                 >Spending Amount</label
@@ -58,11 +56,59 @@
                 formControlName="amount"
               />
             </div>
-            <p class="error-message" *ngIf="form.invalid && form.touched">
-              Invalid Input
+            <p
+              class="error-message"
+              *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched"
+            >
+              Invalid Amount Input
             </p>
+            <p
+              class="error-message"
+              *ngIf="
+                form.get('datePicker')?.invalid &&
+                form.get('datePicker')?.touched
+              "
+            >
+              Invalid Date Input
+            </p>
+            <!-- <p class="error-message" *ngIf="form.invalid && form.touched"></p> -->
+          </div>
+
+          <div class="input-container">
+            <label class="custom-control-label ms-1 me-2 mb-2" for="amount"
+              >Description</label
+            >
+            <textarea
+              class="form-control"
+              id="description"
+              rows="3"
+              value="description"
+              name="description"
+              formControlName="description"
+            ></textarea>
           </div>
         </form>
+      </div>
+      <hr class="text-black-50" />
+      <div>
+        <h5 class="p-3">Spending List</h5>
+        <table class="table table-bordered p-3">
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th width="220px">Action</th>
+          </tr>
+          <tr *ngFor="let spendingList of spendingLists">
+            <td>{{ spendingList.date }}</td>
+            <td>{{ spendingList.amount }}</td>
+            <td>{{ spendingList.description }}</td>
+            <td>
+              <a href="#" class="btn btn-primary">Edit</a>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closePopup()">

@@ -6,8 +6,10 @@ import {
   NgbDatepickerModule,
   NgbDate,
   NgbModule,
+  NgbCalendar,
   NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
+import { spendingList } from '../spending-list.model';
 
 @Component({
   selector: 'app-dashboard-modal',
@@ -18,7 +20,10 @@ export class DashboardModalComponent implements OnInit {
   form: FormGroup;
   showPopup = true;
   isSubmitted = false;
-  model!: NgbDateStruct;
+
+  date: NgbDate = new NgbDate(1789, 7, 14);
+  model: NgbDateStruct | undefined;
+  spendingLists: spendingList[] = [];
 
   displayMonths = 1;
   navigation = 'select box';
@@ -27,24 +32,31 @@ export class DashboardModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private popupService: PopupServiceService
+    private popupService: PopupServiceService,
+    private calendar: NgbCalendar
   ) {
     this.form = this.formBuilder.group({
       amount: [null, [Validators.required, Validators.min(0)]],
       datePicker: [null, Validators.required],
+      description: [null, Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.popupService.getOpenPop().subscribe((popup: boolean) => {
       this.showPopup = popup;
+      this.model = this.calendar.getToday();
     });
     console.log(this.showPopup);
+    this.popupService.getData().subscribe((data) => {
+      this.spendingLists = data;
+    });
   }
 
   save() {
     this.isSubmitted = true;
     console.log(this.form.value);
+    console.log(this.date);
     this.closePopup();
     this.form.reset();
   }
