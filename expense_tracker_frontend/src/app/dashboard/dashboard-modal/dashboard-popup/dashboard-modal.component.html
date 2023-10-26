@@ -36,6 +36,7 @@
                 ngbDatepicker
                 #d="ngbDatepicker"
                 formControlName="datePicker"
+                (ngModelChange)="onDateChange($event)"
               />
               <button
                 class="btn btn-outline-secondary fa fa-calendar"
@@ -94,15 +95,15 @@
         <h5 class="p-3">Spending List</h5>
         <table class="table table-bordered p-3">
           <tr>
-            <th>Date</th>
+            <th class="ps-3">Date</th>
             <th>Amount</th>
             <th>Description</th>
-            <th width="220px">Action</th>
+            <th width="130px">Action</th>
           </tr>
-          <tr *ngFor="let spendingList of spendingLists">
-            <td>{{ spendingList.date }}</td>
-            <td>{{ spendingList.amount }}</td>
-            <td>{{ spendingList.description }}</td>
+          <tr *ngFor="let filtereditem of filteredList">
+            <td>{{ filtereditem.date }}</td>
+            <td>{{ filtereditem.amount }}</td>
+            <td>{{ filtereditem.description }}</td>
             <td>
               <a href="#" class="btn btn-primary">Edit</a>
               <button type="button" class="btn btn-danger">Delete</button>

@@ -1,5 +1,5 @@
 export interface spendingList {
-  date: Date;
+  date: string;
   amount: number;
   description: string;
 }
