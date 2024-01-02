@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { ProfileComponent } from './profile/profile.component';
-import { SharedComponent } from './shared/shared.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
@@ -20,6 +19,7 @@ import { ReportModule } from './report/report.module';
 import { DropdowndirectivePipe } from './shared/dropdowndirective.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShareModule } from './shared/share.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     SearchFilterComponent,
     ProfileComponent,
-    SharedComponent,
     NotificationComponent,
     ErrorHandlingComponent,
     SpinnerComponent,
@@ -45,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule,
     FormsModule,
     NgbModule,
+    ShareModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,9 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EarningByMonthChartsComponent } from './earning-by-month-charts/earning-by-month-charts.component';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../shared/modal/modal.component';
-import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
-import { DashboardHeaderComponent } from './dashboard-header/dashboard-header/dashboard-header.component';
 import { DashboardModalComponent } from './dashboard-modal/dashboard-popup/dashboard-modal.component';
+import { DashboardHeaderComponent } from './dashboard-header/dashboard-header/dashboard-header.component';
+import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
