@@ -2,28 +2,32 @@
   <!-- Sidebar -->
   <div id="sidebar">
     <header>
-      <a>Expense Tracker</a>
+      <a routerLink="/home">Expense Tracker</a>
     </header>
     <div class="col-md-12 bg-dark">
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link text-white"
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/dashboard"
             ><i class="fa fa-dashcube"></i> Dashboard</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"><i class="fa fa-money"></i>Budget</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/budget"
+            ><i class="fa fa-money"></i>Budget</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/transaction"
             ><i class="fa fa-exchange"></i>Transaction</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"><i class="fa fa-file"></i>Report</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/report"
+            ><i class="fa fa-file"></i>Report</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/export"
             ><i class="fa fa-file-pdf-o"></i>Export</a
           >
         </li>
