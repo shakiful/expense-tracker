@@ -7,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-header.component.scss'],
 })
 export class DashboardHeaderComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showPopup = false;
+  }
   constructor(private popupService: PopupServiceService) {}
-  showPopup = true;
+  showPopup: boolean = false;
   openPopup(): void {
+    this.showPopup = true;
     this.popupService.setOpenPop(this.showPopup);
   }
 }

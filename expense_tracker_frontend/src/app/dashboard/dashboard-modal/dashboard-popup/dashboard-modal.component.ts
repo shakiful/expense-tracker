@@ -15,8 +15,8 @@ import {
 })
 export class DashboardModalComponent implements OnInit {
   form: FormGroup;
-  showPopup = true;
-  isSubmitted = false;
+  showPopup: boolean = false;
+  isSubmitted: boolean = false;
 
   date: NgbDate = new NgbDate(1789, 7, 14);
   model: NgbDateStruct | undefined;
