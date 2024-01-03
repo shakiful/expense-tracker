@@ -20,6 +20,7 @@ import { DropdowndirectivePipe } from './shared/dropdowndirective.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShareModule } from './shared/share.module';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ShareModule } from './shared/share.module';
     ErrorHandlingComponent,
     SpinnerComponent,
     DropdowndirectivePipe,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

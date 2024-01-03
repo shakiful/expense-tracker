@@ -14,13 +14,15 @@ import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import * as d3 from 'd3';
 
+import { SelectedOption } from 'src/app/shared/Enums/selected-option.Enum';
 @Component({
   selector: 'app-loan-charts',
   templateUrl: './loan-charts.component.html',
   styleUrls: ['./loan-charts.component.scss'],
 })
 export class LoanChartsComponent implements OnInit {
-  selectedOption: string = '5';
+  selectedOptionEnum: typeof SelectedOption = SelectedOption;
+  selectedOption: SelectedOption = SelectedOption.FiveDays;
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.LineSeries; // Type annotation for series
@@ -39,7 +41,7 @@ export class LoanChartsComponent implements OnInit {
     this.onSelected(this.selectedOption);
   }
 
-  onSelected(value: string) {
+  onSelected(value: SelectedOption) {
     this.selectedOption = value;
 
     this.chartInit(this.selectedOption);

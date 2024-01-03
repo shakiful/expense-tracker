@@ -14,13 +14,16 @@ import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import * as d3 from 'd3';
 
+import { SelectedOption } from 'src/app/shared/Enums/selected-option.Enum';
+
 @Component({
   selector: 'app-saving-charts',
   templateUrl: './saving-charts.component.html',
   styleUrls: ['./saving-charts.component.scss'],
 })
 export class SavingChartsComponent implements OnInit {
-  selectedOption: string = '5';
+  selectedOptionEnum: typeof SelectedOption = SelectedOption;
+  selectedOption: SelectedOption = SelectedOption.FiveDays;
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart;
   private series!: am5xy.LineSeries;
@@ -39,7 +42,7 @@ export class SavingChartsComponent implements OnInit {
     this.onSelected(this.selectedOption);
   }
 
-  onSelected(value: string) {
+  onSelected(value: SelectedOption) {
     this.selectedOption = value;
 
     this.chartInit(this.selectedOption);

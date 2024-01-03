@@ -13,6 +13,7 @@ import {
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { SelectedOption } from 'src/app/shared/Enums/selected-option.Enum';
 
 @Component({
   selector: 'app-spending-charts',
@@ -20,9 +21,10 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
   styleUrls: ['./spending-charts.component.scss'],
 })
 export class SpendingChartsComponent implements OnInit {
+  selectedOptionEnum: typeof SelectedOption = SelectedOption;
+  selectedOption: SelectedOption = SelectedOption.FiveDays;
   public option: boolean = false;
   isClicked: boolean = false;
-  public defaultDateRange: string = '5';
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
@@ -43,13 +45,13 @@ export class SpendingChartsComponent implements OnInit {
     private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
   ngOnInit(): void {
-    this.chartInit(this.defaultDateRange);
+    this.chartInit(this.selectedOption);
   }
 
-  onSelected(value: string) {
-    this.defaultDateRange = value;
+  onSelected(value: SelectedOption) {
+    this.selectedOption = value;
 
-    this.chartInit(this.defaultDateRange);
+    this.chartInit(this.selectedOption);
   }
 
   // Chart code goes in here
@@ -298,6 +300,6 @@ export class SpendingChartsComponent implements OnInit {
 
     this.isClicked = false;
     this.option = false;
-    this.chartInit(this.defaultDateRange);
+    this.chartInit(this.selectedOption);
   }
 }

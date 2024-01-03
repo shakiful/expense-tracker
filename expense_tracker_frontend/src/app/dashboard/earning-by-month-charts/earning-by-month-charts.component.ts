@@ -1,3 +1,4 @@
+import { SelectedOption } from './../../shared/Enums/selected-option.Enum';
 import {
   Component,
   Inject,
@@ -20,7 +21,7 @@ import { DashboardService } from 'src/app/services/dashboard-service/dashboard.s
   styleUrls: ['./earning-by-month-charts.component.scss'],
 })
 export class EarningByMonthChartsComponent implements OnInit {
-  defaultDateRange: string = '5';
+  defaultDateRange: SelectedOption = SelectedOption.FiveDays;
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
@@ -42,7 +43,7 @@ export class EarningByMonthChartsComponent implements OnInit {
     this.onSelected(this.defaultDateRange);
   }
 
-  onSelected(value: string) {
+  onSelected(value: SelectedOption) {
     this.defaultDateRange = value;
 
     this.chartInit(this.defaultDateRange);

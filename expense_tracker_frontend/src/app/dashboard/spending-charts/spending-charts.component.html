@@ -8,12 +8,18 @@
   <div class="d-flex flex-column" *ngIf="option">
     <select
       class="bg-white"
-      [(ngModel)]="defaultDateRange"
+      [(ngModel)]="selectedOption"
       (ngModelChange)="onSelected($event)"
     >
-      <option value="5">5 Days</option>
-      <option value="15">15 Days</option>
-      <option value="30">30 Days</option>
+      <option [value]="selectedOptionEnum.FiveDays">
+        {{ selectedOptionEnum.FiveDays }} Days
+      </option>
+      <option [value]="selectedOptionEnum.FifteenDays">
+        {{ selectedOptionEnum.FifteenDays }} Days
+      </option>
+      <option [value]="selectedOptionEnum.ThirtyDays">
+        {{ selectedOptionEnum.ThirtyDays }} Days
+      </option>
     </select>
     <br />
     <button class="btn btn-light rounded" (click)="goBack()">

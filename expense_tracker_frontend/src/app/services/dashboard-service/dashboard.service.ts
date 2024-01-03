@@ -7,10 +7,10 @@ import { Subject, filter } from 'rxjs';
 export class DashboardService {
   constructor() {}
 
-  private monthIndex = new Subject<any>();
-  private totalCost = new Subject<any>();
+  private monthIndex = new Subject<number>();
+  private totalCost = new Subject<number>();
 
-  setMonthIndex(data: any) {
+  setMonthIndex(data: number) {
     // Process the data here
     console.log(data);
 
@@ -22,6 +22,7 @@ export class DashboardService {
   }
 
   getTotalCost() {
+    // TODO: do we even need to return asObsertable() ?
     return this.totalCost.asObservable();
   }
 

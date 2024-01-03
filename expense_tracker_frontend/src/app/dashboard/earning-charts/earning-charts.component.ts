@@ -12,22 +12,25 @@ import { isPlatformBrowser } from '@angular/common';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
-import { DashboardService } from 'src/app/services/dashboard-service/dashboard.service';
 
+import { DashboardService } from 'src/app/services/dashboard-service/dashboard.service';
+import { SelectedOption } from '../../shared/Enums/selected-option.Enum';
 @Component({
   selector: 'app-earning-charts',
   templateUrl: './earning-charts.component.html',
   styleUrls: ['./earning-charts.component.scss'],
 })
 export class EarningChartsComponent implements OnInit {
-  selectedOption: string = '5';
+  // TODO: Convert it into ENUM
+  selectedOptionEnum: typeof SelectedOption = SelectedOption;
+  selectedOption: SelectedOption = SelectedOption.FiveDays;
   private root: am5.Root | undefined; // Initialize as undefined initially
   private chart!: am5xy.XYChart; // Type annotation for chart
   private series!: am5xy.ColumnSeries; // Type annotation for series
+  private monthIndex: number | undefined;
   public chartData: any[] = []; // Store chart data
   public selectedData: any[] = []; // Store selected chart data
-  private monthIndex: any;
-  total_cost: number | undefined;
+  public total: number | undefined;
 
   // Created the axes as class properties
   private xAxis: am5xy.DateAxis<any> | undefined;
@@ -41,10 +44,10 @@ export class EarningChartsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.dashboardService.getTotalCost().subscribe((data: number) => {
-      this.total_cost = data;
+      this.total = data;
     });
 
-    this.dashboardService.getMonthIndex().subscribe((data: any) => {
+    this.dashboardService.getMonthIndex().subscribe((data: number) => {
       this.monthIndex = data;
       this.chartInit();
     });
@@ -52,7 +55,7 @@ export class EarningChartsComponent implements OnInit {
     this.onSelected(this.selectedOption);
   }
 
-  onSelected(value: string) {
+  onSelected(value: SelectedOption) {
     this.selectedOption = value;
 
     this.chartInit();
@@ -64,6 +67,7 @@ export class EarningChartsComponent implements OnInit {
       // Initialize the root only if it's not already created
       if (!this.root) {
         this.root = am5.Root.new('chartdiv');
+        //to get rid of the amcharts logo
         this.root._logo?.dispose();
         this.root.setThemes([am5themes_Animated.new(this.root)]);
 
