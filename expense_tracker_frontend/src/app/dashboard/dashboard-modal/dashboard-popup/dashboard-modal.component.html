@@ -28,19 +28,14 @@
                 class="form-control"
                 placeholder="yyyy-mm-dd"
                 name="dp"
-                [(ngModel)]="model"
-                [displayMonths]="displayMonths"
-                [navigation]="navigation"
-                [outsideDays]="outsideDays"
-                [showWeekNumbers]="showWeekNumbers"
+
                 ngbDatepicker
-                #d="ngbDatepicker"
                 formControlName="datePicker"
                 (ngModelChange)="onDateChange($event)"
               />
               <button
                 class="btn btn-outline-secondary fa fa-calendar"
-                (click)="d.toggle()"
+
                 type="button"
               ></button>
             </div>
